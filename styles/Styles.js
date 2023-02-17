@@ -62,4 +62,4 @@ const Styles = StyleSheet.create({
       }
 });
 
-export {Styles};
+export default {Styles};
