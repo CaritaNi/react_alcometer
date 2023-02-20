@@ -1,11 +1,10 @@
-import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Button, Text, TextInput, TouchableOpacity, View, ScrollView } from 'react-native';
 import React, {useState} from 'react';
-import Styles from '../styles/Styles';
-import Radiobutton from '../components/radiobutton';
+import style from '../styles/style';
 
 
 
-export default function Alcometer(){
+const Alcometer = () => {
   const [weight, setWeight] = useState(0);
   const [bottles, setBottles] = useState(1);
   const [time, setTime] = useState(1);
@@ -14,92 +13,83 @@ export default function Alcometer(){
 
   const [resultColor, setResultColor] = useState("green");
 
-  const gender=[
-    {
-      label: 'Male',
-      value:'male'
-    },
-    {
-      label: 'Female',
-      value:'female'
-  }]
-  
-  
     function calculate() {
   
-      const content = 0;
       const litres = bottles * 0.33;
-      const gram = litres * 8 * 4.5;
-      const burning = weight / 10;
-      const remaining = gram - (burning * time);
-  
-      if (sex === 'male'){
-        content= remaining / (weight * 0.7);
-      }
-      else {
-        content= remaining / (weight * 0.6);
-      }
-      setResult(content);
-      
-      if (content > 0){
-        setResult(content)
+      const initialGrams = litres * 8 * 4.5;
+      const burnedGrams = weight / 10 * time;
+      const remainingGrams = initialGrams - burnedGrams;
+      setResult(remainingGrams.toFixed(2))
+    
+      let content = 0;
+      if (sex === 'male') {
+        content = remainingGrams / (weight * 0.7);
       } else {
-        setResult(0)
+        content = remainingGrams / (weight * 0.6);
+      }
+    
+      if (content > 0) {
+        setResult(content);
+      } else {
+        setResult(0);
       }
     }
 
-
-  
+    
     
     return (
-    <View style={Styles.container}>
-        <Text style={Styles.title}>Alcometer</Text>
+    <ScrollView>
+    <View style={style.container}>
+        <Text style={style.title}>Alcometer</Text>
       <View>
-        <Text style={Styles.label}>Weight : </Text>
-          <TextInput style={Styles.textInput}
-          keyboardType='numeric'
+        <Text style={style.label}>Weight : </Text>
+          <TextInput style={style.textInput}
+          keyboardType='number-pad'
           value ={weight}
-          onChange={e=> setWeight(e.target.value)} />
-
-        <TextInput style={Styles.textInput}/>
-        <Text style={Styles.label}>Bottles :</Text>
-          <TextInput style={Styles.textInput}
+          onChangeText= {(text) => setWeight(text)} />
+      </View>
+      <View>
+        <Text style={style.label}>Bottles :</Text>
+          <TextInput style={style.textInput}
           id='bottles'
-          keyboardType='numeric'
+          keyboardType='number-pad'
           value={bottles}
-          onChange={e=> setBottles(e.target.value)}/>
-
-        <TextInput style={Styles.textInput}/>
-        <Text style={Styles.label}>Time :</Text>
-          <TextInput style={Styles.textInput}
+          onChangeText={(text) =>setBottles(text)}/>
+      </View>
+      <View>
+        <Text style={style.label}>Time :</Text>
+          <TextInput style={style.textInput}
           id='time'
-          keyboardType='numeric'
+          keyboardType='number-pad'
           value={time}
-          onChange={e=> setTime(e.target.value)}/>
+          onChangeText={(text) =>setTime(text)}/>
+      </View>
 
-        <TextInput style={Styles.textInput}/>
-       <Text style={Styles.title}>Gender</Text>
-
-      <View style={Styles.radioButtonContainer}>
-          <TouchableOpacity onPress={() => {}} style={Styles.radioButton}>
-          <Text style={Styles.radioButtonText}>Male</Text>
-      <View style={Styles.radioButtonIcon} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => {}}>
-          <Text style={Styles.radioButtonText}>Female</Text>
-          </TouchableOpacity>
+      <View style={style.container}>
+       <Text style={style.title}>Gender: </Text>
+        <TouchableOpacity
+          onPress={() => setSex('male')} 
+          style={style.genderButton}
+          >
+          <Text style={style.genderButtonText}>Male</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => setSex('female')} 
+        style={style.genderButton}
+        >
+          <Text style={style.genderButtonText}>Female</Text>
+        </TouchableOpacity>
       </View>
         
       
-        <View style={Styles.button}>
-        <Button onPress = {() => Alcometer()}>
-          <Text style={Styles.text}>SUBMIT</Text>
-        </Button>
-        <Text style={Styles.label}>Result :</Text> 
-        <output>{result.toFixed(1)}</output>
+        <View style={style.button}>
+        <TouchableOpacity onPress = {() => calculate()} style={style.button}>
+          <Text style={style.buttonText}>SUBMIT</Text>
+        </TouchableOpacity>
       </View>
+      <Text style={style.label}>Result : {result.toFixed(2)}</Text> 
     </View>
-    </View>
+    </ScrollView>
     );
   }
 
+  export default Alcometer;
