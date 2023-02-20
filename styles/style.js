@@ -25,28 +25,12 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     width: '100%',
   },
-  genderButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: 5,
-    backgroundColor: '#239F9F',
-    width: 90,
-    height: 70,
-  },
-  genderButtonText:{
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 7,
-    color : 'white',
-    fontWeight: 'bold', 
-    textAlign: 'center',
-  },
   button: {
     backgroundColor: '#4CAF50',
     borderRadius: 4,
     padding: 10,
     margin: 10,
-    width: '50%',
+    width: '20%',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -59,6 +43,28 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  radioButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 10,
+  },
+  radioButtonIcon: {
+    width: 20,
+    height: 20,
+    borderRadius: 10,
+    borderWidth: 2,
+    borderColor: 'black',
+    marginHorizontal: 10,
+  },
+  radioButtonIconChecked: {
+    backgroundColor: '#4CAF50',
+    borderColor: '#3f51b5',
+  },
+  radioButtonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#000',
   },
 });
 
