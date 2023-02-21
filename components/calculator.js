@@ -94,7 +94,7 @@ const Alcometer = () => {
           onPress={() => setSex(option.value)}
         >
         <View style={[style.radioButtonIcon, isDarkMode ? style.radioButtonIconDark : style.radioButtonIcon]} />
-          <Text style={[style.radioButtonText, , isDarkMode ? style.darkText : style.lightText]}>{option.label}</Text>
+          <Text style={[style.radioButtonText, style.radioButtonIconChecked , isDarkMode ? style.darkText : style.lightText]}>{option.label}</Text>
         </TouchableOpacity>
         ))}
       </View>
